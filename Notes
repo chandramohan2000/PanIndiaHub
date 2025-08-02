@@ -1,0 +1,8 @@
+gitsh steps:
+Clean and Rebuild
+Before deploying, always clean and rebuild:
+
+1. delete dist folder manually
+2. ng build --configuration production --base-href=/PanIndiaHub/
+
+3. ng deploy --base-href=/PanIndiaHub/ --dir=dist/ecommerce-landing-page
