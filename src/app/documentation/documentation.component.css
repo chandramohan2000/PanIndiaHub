@@ -1,0 +1,321 @@
+/* Only keep documentation-specific styles. Remove all .navbar, .nav-container, .nav-logo, .nav-menu, .nav-link, .nav-actions, .menu-toggle, .cart-count, .footer, .footer-content, .footer-section, .footer-logo, .footer-bottom, .footer-links, .contact-info, and related responsive rules. */
+
+.documentation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  margin-top: 80px;
+}
+
+.documentation-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.documentation-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.documentation-header p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.documentation-content {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.api-section {
+  padding: 2rem;
+}
+
+.api-section h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #3498db;
+  font-weight: 600;
+}
+
+.api-overview {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #3498db;
+}
+
+.api-overview h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.api-overview p {
+  margin: 0;
+  color: #555;
+}
+
+.api-endpoint {
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.api-endpoint h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.endpoint-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.method-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: white;
+}
+
+.method-badge.post {
+  background: #e74c3c;
+}
+
+.method-badge.get {
+  background: #27ae60;
+}
+
+.method-badge.put {
+  background: #f39c12;
+}
+
+.method-badge.delete {
+  background: #8e44ad;
+}
+
+.endpoint-url {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.request-section,
+.response-section {
+  margin-bottom: 1.5rem;
+}
+
+.request-section h4,
+.response-section h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.parameter-table {
+  overflow-x: auto;
+}
+
+.parameter-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.parameter-table th {
+  background: #34495e;
+  color: white;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.parameter-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.parameter-table tr:last-child td {
+  border-bottom: none;
+}
+
+.parameter-table tr:hover {
+  background: #f8f9fa;
+}
+
+.parameter-table code {
+  background: #f1f2f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+.request-example {
+  margin-bottom: 1.5rem;
+}
+
+.request-example h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.code-block {
+  background: #2c3e50;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-block code {
+  color: #ecf0f1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.response-success h5,
+.response-error h5 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.response-success h5 {
+  color: #27ae60;
+}
+
+.response-error h5 {
+  color: #e74c3c;
+}
+
+.implementation-notes {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.implementation-notes h3 {
+  color: #856404;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.implementation-notes ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.implementation-notes li {
+  margin-bottom: 0.5rem;
+  color: #856404;
+}
+
+.implementation-notes strong {
+  color: #2c3e50;
+}
+
+.code-examples {
+  margin-top: 2rem;
+}
+
+.code-examples h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.example-section {
+  margin-bottom: 2rem;
+}
+
+.example-section h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #3498db;
+}
+
+@media (max-width: 768px) {
+  .documentation-container {
+    padding: 1rem;
+  }
+  .documentation-header h1 {
+    font-size: 2rem;
+  }
+  .api-section {
+    padding: 1rem;
+  }
+  .endpoint-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .parameter-table {
+    font-size: 0.9rem;
+  }
+  .parameter-table th,
+  .parameter-table td {
+    padding: 0.5rem;
+  }
+}
+
+/* Syntax highlighting for code blocks */
+.code-block code .keyword {
+  color: #e74c3c;
+}
+
+.code-block code .string {
+  color: #27ae60;
+}
+
+.code-block code .number {
+  color: #f39c12;
+}
+
+.code-block code .comment {
+  color: #95a5a6;
+  font-style: italic;
+} 

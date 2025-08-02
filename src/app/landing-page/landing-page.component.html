@@ -1,0 +1,440 @@
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Pan India Hub</span>
+    </div>
+    
+         <div class="nav-menu" [class.active]="isMenuOpen">
+       <a routerLink="/" class="nav-link">Home</a>
+       <a [routerLink]="['/']" fragment="categories" class="nav-link">Categories</a>
+       <a [routerLink]="['/']" fragment="products" class="nav-link">Products</a>
+       <a [routerLink]="['/']" fragment="about" class="nav-link">About</a>
+       <a [routerLink]="['/']" fragment="contact" class="nav-link">Contact</a>
+       <a routerLink="/documentation" class="nav-link">Documentation</a>
+     </div>
+    
+    <div class="nav-actions">
+      <button class="search-btn">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">
+        Discover Amazing Products at 
+        <span class="highlight">Unbeatable Prices</span>
+      </h1>
+      <p class="hero-subtitle">
+        Shop from thousands of products across all categories. Fast delivery, secure payments, and exceptional customer service.
+      </p>
+      <div class="hero-search">
+        <div class="search-container">
+          <input 
+            type="text" 
+            placeholder="What are you looking for today?"
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+            class="search-input"
+          >
+          <button class="search-button" (click)="onSearch()">
+            <i class="fas fa-search"></i>
+            Search
+          </button>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">50K+</span>
+          <span class="stat-label">Products</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100K+</span>
+          <span class="stat-label">Customers</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Support</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop" alt="Shopping">
+    </div>
+  </div>
+</section>
+
+<!-- Home Testimonials Section -->
+<section class="home-testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our Customers Love</h2>
+      <p>Real experiences from our valued customers</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-glass-card" *ngFor="let testimonial of homeTestimonials">
+        <div class="glass-content">
+          <div class="testimonial-header">
+            <img [src]="testimonial.avatar" [alt]="testimonial.name" class="customer-avatar">
+            <div class="customer-info">
+              <h4>{{ testimonial.name }}</h4>
+              <span class="customer-location">{{ testimonial.location }}</span>
+              <div class="rating">
+                <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]" 
+                   [class.filled]="star <= testimonial.rating"></i>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-body">
+            <p>"{{ testimonial.content }}"</p>
+          </div>
+          <div class="testimonial-footer">
+            <span class="purchase-info">Purchased: {{ testimonial.purchase }}</span>
+            <span class="date">{{ testimonial.date }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section id="categories" class="categories">
+  <div class="container">
+    <div class="section-header">
+      <h2>Shop by Category</h2>
+      <p>Explore our wide range of product categories</p>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card" *ngFor="let category of categories">
+        <div class="category-icon">
+          <i [class]="category.icon"></i>
+        </div>
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.count }}+ Products</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section id="products" class="featured-products">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <p>Handpicked products just for you</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name">
+          <div class="discount-badge" *ngIf="product.originalPrice > product.price">
+            -{{ getDiscountPercentage(product.originalPrice, product.price) }}%
+          </div>
+          <button class="add-to-cart-btn">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+        </div>
+        <div class="product-info">
+          <span class="product-category">{{ product.category }}</span>
+          <h3 class="product-name">{{ product.name }}</h3>
+          <div class="product-rating">
+            <div class="stars">
+              <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]" 
+                 [class.filled]="star <= product.rating"></i>
+            </div>
+            <span class="reviews">({{ product.reviews }})</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">${{ product.price }}</span>
+            <span class="original-price" *ngIf="product.originalPrice > product.price">${{ product.originalPrice }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our Customers Say</h2>
+      <p>Real reviews from real customers</p>
+    </div>
+    <div class="testimonials-slider">
+      <div class="testimonial-card" [class.active]="currentSlide === i" *ngFor="let testimonial of testimonials; let i = index">
+        <div class="testimonial-content">
+          <div class="quote-icon">
+            <i class="fas fa-quote-left"></i>
+          </div>
+          <p>{{ testimonial.content }}</p>
+          <div class="testimonial-author">
+            <img [src]="testimonial.avatar" [alt]="testimonial.name" class="author-avatar">
+            <div class="author-info">
+              <h4>{{ testimonial.name }}</h4>
+              <span>{{ testimonial.role }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn prev" (click)="prevSlide()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="slider-dots">
+          <button 
+            class="dot" 
+            [class.active]="currentSlide === i"
+            (click)="goToSlide(i)"
+            *ngFor="let testimonial of testimonials; let i = index">
+          </button>
+        </div>
+        <button class="slider-btn next" (click)="nextSlide()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+ </section>
+
+ <!-- About Section -->
+ <section id="about" class="about">
+   <div class="container">
+     <div class="section-header">
+                 <h2>About Pan India Hub</h2>
+       <p>Your trusted partner in online shopping</p>
+     </div>
+     <div class="about-content">
+       <div class="about-text">
+         <div class="about-story">
+           <h3>Our Story</h3>
+                         <p>Founded in 2020, Pan India Hub has grown from a small local marketplace to one of the leading e-commerce platforms, serving millions of customers worldwide. We believe in making quality products accessible to everyone at competitive prices.</p>
+         </div>
+         <div class="about-mission">
+           <h3>Our Mission</h3>
+           <p>To provide an exceptional shopping experience with a vast selection of products, competitive pricing, and outstanding customer service. We're committed to building trust and lasting relationships with our customers.</p>
+         </div>
+         <div class="about-values">
+           <h3>Our Values</h3>
+           <div class="values-grid">
+             <div class="value-item">
+               <i class="fas fa-heart"></i>
+               <h4>Customer First</h4>
+               <p>Your satisfaction is our top priority</p>
+             </div>
+             <div class="value-item">
+               <i class="fas fa-shield-alt"></i>
+               <h4>Quality Assured</h4>
+               <p>We only offer products we trust</p>
+             </div>
+             <div class="value-item">
+               <i class="fas fa-shipping-fast"></i>
+               <h4>Fast Delivery</h4>
+               <p>Quick and reliable shipping</p>
+             </div>
+             <div class="value-item">
+               <i class="fas fa-handshake"></i>
+               <h4>Trust & Transparency</h4>
+               <p>Honest pricing and clear policies</p>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="about-stats">
+         <div class="stat-card">
+           <div class="stat-icon">
+             <i class="fas fa-users"></i>
+           </div>
+           <div class="stat-info">
+             <h3>2M+</h3>
+             <p>Happy Customers</p>
+           </div>
+         </div>
+         <div class="stat-card">
+           <div class="stat-icon">
+             <i class="fas fa-box"></i>
+           </div>
+           <div class="stat-info">
+             <h3>500K+</h3>
+             <p>Products Delivered</p>
+           </div>
+         </div>
+         <div class="stat-card">
+           <div class="stat-icon">
+             <i class="fas fa-star"></i>
+           </div>
+           <div class="stat-info">
+             <h3>4.8</h3>
+             <p>Average Rating</p>
+           </div>
+         </div>
+         <div class="stat-card">
+           <div class="stat-icon">
+             <i class="fas fa-globe"></i>
+           </div>
+           <div class="stat-info">
+             <h3>50+</h3>
+             <p>Countries Served</p>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+
+ <!-- CTA Section -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to Start Shopping?</h2>
+      <p>Join thousands of satisfied customers and discover amazing products today.</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary">Start Shopping</button>
+        <button class="btn btn-secondary">Learn More</button>
+      </div>
+    </div>
+     </div>
+ </section>
+
+ <!-- Contact Section -->
+ <section id="contact" class="contact">
+   <div class="container">
+     <div class="section-header">
+       <h2>Get In Touch</h2>
+       <p>We'd love to hear from you</p>
+     </div>
+     <div class="contact-content">
+       <div class="contact-info">
+         <div class="contact-item">
+           <div class="contact-icon">
+             <i class="fas fa-map-marker-alt"></i>
+           </div>
+           <div class="contact-details">
+             <h4>Our Location</h4>
+             <p>123 Shopping St, Retail City<br>RC 12345, United States</p>
+           </div>
+         </div>
+         <div class="contact-item">
+           <div class="contact-icon">
+             <i class="fas fa-phone"></i>
+           </div>
+           <div class="contact-details">
+             <h4>Phone Number</h4>
+             <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+           </div>
+         </div>
+         <div class="contact-item">
+           <div class="contact-icon">
+             <i class="fas fa-envelope"></i>
+           </div>
+           <div class="contact-details">
+             <h4>Email Address</h4>
+                             <p>info&#64;panindiahub.com<br>support&#64;panindiahub.com</p>
+           </div>
+         </div>
+         <div class="contact-item">
+           <div class="contact-icon">
+             <i class="fas fa-clock"></i>
+           </div>
+           <div class="contact-details">
+             <h4>Business Hours</h4>
+             <p>Monday - Friday: 9AM - 6PM<br>Saturday: 10AM - 4PM</p>
+           </div>
+         </div>
+       </div>
+       <div class="contact-form">
+         <h3>Send us a Message</h3>
+         <form>
+           <div class="form-group">
+             <input type="text" placeholder="Your Name" required>
+           </div>
+           <div class="form-group">
+             <input type="email" placeholder="Your Email" required>
+           </div>
+           <div class="form-group">
+             <input type="text" placeholder="Subject">
+           </div>
+           <div class="form-group">
+             <textarea placeholder="Your Message" rows="5" required></textarea>
+           </div>
+           <button type="submit" class="btn btn-primary">Send Message</button>
+         </form>
+       </div>
+     </div>
+   </div>
+ </section>
+
+ <!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Pan India Hub</span>
+        </div>
+        <p>Your ultimate destination for online shopping. Quality products, competitive prices, and exceptional service.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><a [routerLink]="['/']" fragment="categories">Categories</a></li>
+          <li><a [routerLink]="['/']" fragment="products">Products</a></li>
+          <li><a [routerLink]="['/']" fragment="about">About Us</a></li>
+          <li><a [routerLink]="['/']" fragment="contact">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> 123 Shopping St, Retail City, RC 12345</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-envelope"></i> info&#64;panindiahub.com</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 Pan India Hub. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer> 

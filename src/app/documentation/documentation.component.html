@@ -1,0 +1,302 @@
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Pan India Hub</span>
+    </div>
+    <div class="nav-menu" [class.active]="isMenuOpen">
+      <a routerLink="/" class="nav-link">Home</a>
+      <a [routerLink]="['/']" fragment="categories" class="nav-link">Categories</a>
+      <a [routerLink]="['/']" fragment="products" class="nav-link">Products</a>
+      <a [routerLink]="['/']" fragment="about" class="nav-link">About</a>
+      <a [routerLink]="['/']" fragment="contact" class="nav-link">Contact</a>
+      <a routerLink="/documentation" class="nav-link active">Documentation</a>
+    </div>
+    <div class="nav-actions">
+      <button class="search-btn">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Documentation Content -->
+<div class="documentation-container">
+  <div class="documentation-header">
+    <h1>API Documentation</h1>
+    <p>Comprehensive guide for integrating with our services</p>
+  </div>
+  <div class="documentation-content">
+    <section class="api-section">
+      <h2>Simple Login API Documentation</h2>
+      
+      <div class="api-overview">
+        <h3>Overview</h3>
+        <p>
+          The Frappe Framework provides a robust and flexible web application framework built with Python. 
+          This documentation covers the essential login API endpoints for user authentication and session management.
+        </p>
+      </div>
+  
+      <div class="api-endpoint">
+        <h3>Login Endpoint</h3>
+        <div class="endpoint-details">
+          <div class="method-badge post">POST</div>
+          <code class="endpoint-url">/api/method/login</code>
+        </div>
+        
+        <div class="request-section">
+          <h4>Request Parameters</h4>
+          <div class="parameter-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>usr</code></td>
+                  <td>string</td>
+                  <td>Yes</td>
+                  <td>Username</td>
+                </tr>
+                <tr>
+                  <td><code>pwd</code></td>
+                  <td>string</td>
+                  <td>Yes</td>
+                  <td>Password</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+        <div class="request-example">
+          <h4>Request Example</h4>
+          <div class="code-block">
+            <pre><code>curl -X POST https://your-frappe-instance.com/api/method/login \
+   -H 'Content-Type: application/json' \
+   -H 'Accept: application/json' \
+   -d '{{ '{' }}"usr":"Administrator","pwd":"admin"{{ '}' }}'</code></pre>
+          </div>
+        </div>
+  
+        <div class="response-section">
+          <h4>Response</h4>
+          <div class="response-success">
+            <h5>Success Response (200)</h5>
+            <div class="code-block">
+              <pre><code>{{ '{' }}
+ "home_page": "/desk",
+ "full_name": "Administrator",
+ "message": "Logged in"
+{{ '}' }}</code></pre>
+            </div>
+            <p><strong>Cookie:</strong> <code>sid</code> (send this to authenticate future requests). Expires in three days.</p>
+            <div class="code-block">
+              <pre><code>sid=05d8d46aaebff1c87a90f570a3ff1c0f570a3ff1c87a90f56bacd4;
+   path=/;
+   domain=.your-frappe-instance.com;
+   Expires=Sat, 29 Sep 2018 00:59:54 GMT;</code></pre>
+            </div>
+          </div>
+          
+          <div class="response-error">
+            <h5>Error Response (401)</h5>
+            <div class="code-block">
+              <pre><code>Wrong password or username.</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="api-endpoint">
+        <h3>Logout Endpoint</h3>
+        <div class="endpoint-details">
+          <div class="method-badge get">GET</div>
+          <code class="endpoint-url">/api/method/logout</code>
+        </div>
+        
+        <div class="request-example">
+          <h4>Request Example</h4>
+          <div class="code-block">
+            <pre><code>curl -X GET https://your-frappe-instance.com/api/method/logout</code></pre>
+          </div>
+        </div>
+  
+        <div class="response-section">
+          <h4>Response</h4>
+          <div class="response-success">
+            <h5>Success Response (200)</h5>
+            <div class="code-block">
+              <pre><code>{{ '{' }}{{ '}' }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="api-endpoint">
+        <h3>Get Current User</h3>
+        <div class="endpoint-details">
+          <div class="method-badge get">GET</div>
+          <code class="endpoint-url">/api/method/frappe.auth.get_logged_user</code>
+        </div>
+        
+        <div class="request-example">
+          <h4>Request Example</h4>
+          <div class="code-block">
+            <pre><code>curl -X GET https://your-frappe-instance.com/api/method/frappe.auth.get_logged_user</code></pre>
+          </div>
+        </div>
+  
+        <div class="response-section">
+          <h4>Response</h4>
+          <div class="response-success">
+            <h5>Success Response (200)</h5>
+            <div class="code-block">
+              <pre><code>{{ '{' }}
+ "message": "Administrator"
+{{ '}' }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="implementation-notes">
+        <h3>Implementation Notes</h3>
+        <ul>
+          <li><strong>Content-Type:</strong> Use <code>application/x-www-form-urlencoded</code> for login requests</li>
+          <li><strong>Session Management:</strong> Frappe uses server-side sessions with cookies for authentication</li>
+          <li><strong>Cookie Authentication:</strong> The <code>sid</code> cookie must be included in subsequent requests</li>
+          <li><strong>Security:</strong> Passwords are hashed and never stored in plain text</li>
+          <li><strong>Error Handling:</strong> Handle 401 errors for invalid credentials</li>
+        </ul>
+      </div>
+  
+      <div class="code-examples">
+        <h3>Code Examples</h3>
+        
+        <div class="example-section">
+          <h4>JavaScript/Node.js</h4>
+          <div class="code-block">
+            <pre><code>const axios = require('axios');
+  
+  // Login
+  const loginResponse = await axios.post('https://your-instance.com/api/method/login', {{ '{' }}
+    usr: 'Administrator',
+    pwd: 'admin'
+  {{ '}' }}, {{ '{' }}
+    headers: {{ '{' }}
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    {{ '}' }}
+  {{ '}' }});
+  
+  // Store session cookie
+  const sessionCookie = loginResponse.headers['set-cookie'];
+  
+  // Make authenticated requests
+  const userResponse = await axios.get('https://your-instance.com/api/method/frappe.auth.get_logged_user', {{ '{' }}
+    headers: {{ '{' }}
+      'Cookie': sessionCookie
+    {{ '}' }}
+  {{ '}' }});</code></pre>
+          </div>
+        </div>
+  
+        <div class="example-section">
+          <h4>Python</h4>
+          <div class="code-block">
+            <pre><code>import requests
+  
+  # Login
+  login_data = {{ '{' }}
+      'usr': 'Administrator',
+      'pwd': 'admin'
+  {{ '}' }}
+  
+  response = requests.post('https://your-instance.com/api/method/login', 
+                          json=login_data,
+                          headers={{ '{' }}'Accept': 'application/json'{{ '}' }})
+  session_cookies = response.cookies
+  
+  # Make authenticated requests
+  user_response = requests.get(
+      'https://your-instance.com/api/method/frappe.auth.get_logged_user',
+      cookies=session_cookies
+  )</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Pan India Hub</span>
+        </div>
+        <p>Your ultimate destination for online shopping. Quality products, competitive prices, and exceptional service.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><a [routerLink]="['/']" fragment="categories">Categories</a></li>
+          <li><a [routerLink]="['/']" fragment="products">Products</a></li>
+          <li><a [routerLink]="['/']" fragment="about">About Us</a></li>
+          <li><a [routerLink]="['/']" fragment="contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> 123 Shopping St, Retail City, RC 12345</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-envelope"></i> info&#64;panindiahub.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Pan India Hub. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer> 
